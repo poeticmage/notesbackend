@@ -145,6 +145,9 @@ const info=JSON.parse(infor.data.files[fileKey].content);
     })
     const fileKeyF = Object.keys(usersdsF.data.files).find(key => key.endsWith(".json"));
 const usersds=JSON.parse(usersdsF.data.files[fileKeyF].content);
+if (!(uid in usersds)) {
+    usersds[uid] = [];
+}
     const fullds= usersds; //console.log(fullds);
     fullds.users[uid]=userdata;
 
