@@ -112,6 +112,9 @@ const userdata=JSON.parse(userdataF.data.files[fileKeyF].content);
 
 
 
+
+
+
 //put request  to jsonbin to be done with queue handling...
 const queue=[];//first in first serve os...
 let wait=false;
@@ -145,8 +148,8 @@ const info=JSON.parse(infor.data.files[fileKey].content);
     })
     const fileKeyF = Object.keys(usersdsF.data.files).find(key => key.endsWith(".json"));
 const usersds=JSON.parse(usersdsF.data.files[fileKeyF].content);
-const fullds= usersds.users; console.log(fullds);
-fullds[uid]=userdata;
+    const fullds= usersds; //console.log(fullds);
+    usersds.users[uid]=userdata;
 
     const octokit2 = new Octokit({
         auth: tokenT
@@ -157,7 +160,7 @@ fullds[uid]=userdata;
         description: 'user data updated',
         files: {
             "users.json": {
-                content: JSON.stringify({users:fullds}, null, 2)
+                content: JSON.stringify(usersds, null, 2)
             }
         },
         headers: {
@@ -177,5 +180,7 @@ app.put("/login/:username", async (req,res)=>{
     queue.push({req,res});
     waitHandling();
 });
+
+
 
 export default app;
