@@ -145,8 +145,8 @@ const info=JSON.parse(infor.data.files[fileKey].content);
     })
     const fileKeyF = Object.keys(usersdsF.data.files).find(key => key.endsWith(".json"));
 const usersds=JSON.parse(usersdsF.data.files[fileKeyF].content);
-const fullds= usersds; console.log(fullds);
-fullds.users[uid]=userdata;
+const fullds= usersds.users; console.log(fullds);
+fullds[uid]=userdata;
 
     const octokit2 = new Octokit({
         auth: tokenT
@@ -157,7 +157,7 @@ fullds.users[uid]=userdata;
         description: 'user data updated',
         files: {
             "users.json": {
-                content: JSON.stringify(fullds, null, 2)
+                content: JSON.stringify({users:fullds}, null, 2)
             }
         },
         headers: {
