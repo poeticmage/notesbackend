@@ -149,7 +149,6 @@ if (!(uid in usersds)) {
     usersds[uid] = [];
 }
     const fullds= usersds; //console.log(fullds);
-    fullds.users[uid]=userdata;
 
     const octokit2 = new Octokit({
         auth: tokenT
