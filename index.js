@@ -115,6 +115,9 @@ const userdata=JSON.parse(userdataF.data.files[fileKeyF].content);
 
 
 
+
+
+
 //put request  to jsonbin to be done with queue handling...
 const queue=[];//first in first serve os...
 let wait=false;
@@ -149,7 +152,7 @@ const info=JSON.parse(infor.data.files[fileKey].content);
     const fileKeyF = Object.keys(usersdsF.data.files).find(key => key.endsWith(".json"));
 const usersds=JSON.parse(usersdsF.data.files[fileKeyF].content);
     const fullds= usersds; //console.log(fullds);
-    usersds.users[uid]=userdata;
+    fullds.users[uid]=userdata;
 
     const octokit2 = new Octokit({
         auth: tokenT
@@ -160,7 +163,7 @@ const usersds=JSON.parse(usersdsF.data.files[fileKeyF].content);
         description: 'user data updated',
         files: {
             "users.json": {
-                content: JSON.stringify(usersds, null, 2)
+                content: JSON.stringify(fullds, null, 2)
             }
         },
         headers: {
